@@ -1,1 +1,5 @@
--- write your queries here
+SELECT * FROM owners LEFT JOIN vehicles ON owners.id = vehicles.owner_id; -- 1. Joining the two tables together so that every column and record appears, regardless if information doesn't overlap.
+
+SELECT o.first_name, o.last_name, COUNT(*) FROM vehicles v JOIN owners o ON v.owner_id = o.id GROUP BY o.id ORDER BY first_name; -- 2. Counting the number of cars for each owner, while ordering by first_name ascending.
+
+SELECT o.first_name, o.last_name, ROUND(AVG(v.price)) AS average_price, COUNT(*) FROM vehicles v JOIN owners o ON v.owner_id = o.id GROUP BY o.id HAVING COUNT(*) > 1 AND ROUND(AVG(v.price)) > 10000 ORDER BY o.first_name DESC; -- 3. Displays the count and average price for each of the cars as integers, if the owner has more than one vehicle and with an average price greater than 10000, while the first_name is ordered in descending order.
